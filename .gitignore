@@ -1,0 +1,26 @@
+# ── 编译产物 ──
+*.exe
+*.o
+*.obj
+*.res
+*.ilk
+*.pdb
+*.lib
+
+# ── 运行时用户数据（曲库 / 收藏 / 播放列表 / 设置）──
+data/*
+!data/.gitkeep
+
+# ── 调试日志 ──
+*.log
+
+# ── 编辑器 / IDE ──
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+
+# ── 系统垃圾 ──
+Thumbs.db
+desktop.ini
+.DS_Store

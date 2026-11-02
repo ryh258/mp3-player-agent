@@ -1,0 +1,26 @@
+#include <windows.h>
+#include "resource.h"
+
+/* 应用图标（以校徽白玉兰为蓝本重绘） */
+IDI_APPICON ICON "res/app.ico"
+
+/* 启动页画面。
+   注意：必须是 JPEG，不能用 PNG。解码走的是 OleLoadPicture，
+   它对 JPEG/BMP/GIF 支持可靠、对 PNG 不保证 —— 用 PNG 会解码失败，
+   结果就是启动页窗口根本不出现。 */
+IDR_SPLASH RCDATA "res/splash.jpg"
+
+/* 应用清单：启用 Common Controls v6（现代外观）+ DPI 感知 */
+1 24 "res/app.manifest"
+
+/* 输入对话框（新建 / 重命名播放列表、指定添加目标） */
+IDD_INPUT DIALOGEX 0, 0, 230, 100
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "输入"
+FONT 9, "Microsoft YaHei UI", 400, 0, 0x1
+BEGIN
+    LTEXT           "", IDC_INPUT_PROMPT, 12, 10, 206, 38
+    EDITTEXT        IDC_INPUT_EDIT, 12, 50, 206, 15, ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "确定", IDOK, 112, 74, 50, 17
+    PUSHBUTTON      "取消", IDCANCEL, 168, 74, 50, 17
+END
