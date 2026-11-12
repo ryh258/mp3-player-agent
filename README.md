@@ -90,15 +90,25 @@ build.bat
 
 > 脚本结尾会停一下等你按键，方便双击运行时看结果；在 CI 或脚本里调用请加 `--no-pause`（或设环境变量 `CI=1`）。
 
-也可以手动编译：
-> ```bat
-> windres res\app.rc -O coff -o res\app.res
-> gcc -O2 -municode -mwindows -DUNICODE -D_UNICODE ^
->     src\*.c res\app.res -o MP3Player.exe ^
->     -lcomctl32 -lwinmm -lgdi32 -luser32 -lole32 -lshell32 -lcomdlg32 ^
->     -lmfplat -lmfreadwrite -lmfuuid -loleaut32 -luuid -lmsimg32 ^
->     -lwindowscodecs -lshlwapi
-> ```
+也可以手动编译（和 `build.bat` 做的事一样）：
+
+```bat
+mkdir build
+windres res\app.rc -o build\app_res.o -I res
+gcc -O2 -g -Wall -Wextra -municode -mwindows -D_WIN32_WINNT=0x0601 ^
+    -finput-charset=UTF-8 -fexec-charset=UTF-8 -Wl,--no-insert-timestamp ^
+    src\main.c src\ui.c src\app.c src\playlist.c src\util.c ^
+    src\tag_id3.c src\media_len.c src\store.c src\lrc.c ^
+    src\theme.c src\cover.c src\wicdec.c src\nowplaying.c src\splash.c ^
+    src\nav.c src\lyricview.c src\appvol.c src\crash.c ^
+    src\selftest.c src\audio_mf.c build\app_res.o ^
+    -o MP3Player.exe ^
+    -lcomctl32 -lwinmm -lgdi32 -luser32 -lole32 -lshell32 -lcomdlg32 ^
+    -lmfplat -lmfreadwrite -lmfuuid -loleaut32 -luuid -lmsimg32 ^
+    -lwindowscodecs -lshlwapi
+```
+
+> `audio_mci.c` 是早期 MCI 实现，和 `audio_mf.c` 二选一，不参与上面这次编译。
 
 ---
 
