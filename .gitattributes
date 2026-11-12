@@ -1,0 +1,23 @@
+# 统一换行符：源码用 LF，Windows 脚本用 CRLF，
+# 免得 Windows / Linux 来回提交时整份文件被标记成"已修改"。
+* text=auto
+
+*.c        text eol=lf
+*.h        text eol=lf
+*.rc       text eol=lf
+*.md       text eol=lf
+*.yml      text eol=lf
+*.py       text eol=lf
+*.lrc      text eol=lf
+*.manifest text eol=lf
+
+*.bat      text eol=crlf
+*.cmd      text eol=crlf
+*.ps1      text eol=crlf
+
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.ico      binary
+*.exe      binary
+*.res      binary

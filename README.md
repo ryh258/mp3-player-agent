@@ -74,7 +74,7 @@
 ### 依赖
 
 - Windows 10 / 11
-- MinGW-w64 GCC（开发时用的是 GCC 11.5.0）
+- MinGW-w64（开发时用的是 GCC 11.5.0，任意较新的 MinGW-w64 都能编译）
 - 系统自带库：`comctl32 winmm gdi32 user32 ole32 shell32 comdlg32 mfplat mfreadwrite mfuuid oleaut32 uuid msimg32 windowscodecs shlwapi`
 
 ### 编译
@@ -85,7 +85,12 @@ build.bat
 
 产物：`MP3Player.exe`
 
-> 也可以手动编译：
+`build.bat` 会自动按顺序找编译器：仓库根目录的 `mingw64\` → 系统 `PATH` → 常见安装位置（`C:\msys64\ucrt64`、`C:\msys64\mingw64`、`C:\mingw64` 等）。
+如果你的 MinGW 装在别处，用记事本打开 `build.bat`，把开头的 `set "MINGW="` 改成你的 MinGW 根目录即可，**不用改别的地方**。
+
+> 脚本结尾会停一下等你按键，方便双击运行时看结果；在 CI 或脚本里调用请加 `--no-pause`（或设环境变量 `CI=1`）。
+
+也可以手动编译：
 > ```bat
 > windres res\app.rc -O coff -o res\app.res
 > gcc -O2 -municode -mwindows -DUNICODE -D_UNICODE ^
@@ -100,11 +105,12 @@ build.bat
 ## 📁 目录结构
 
 ```
-├── src/            38 个 C 源文件
+├── src/            21 个 .c + 17 个 .h
 │   ├── main.c        入口、窗口创建、菜单、自检
 │   ├── app.c         应用状态、曲库、播放控制
 │   ├── ui.c          主窗口、列表、封面卡片
 │   ├── audio_mf.c    Media Foundation 解码 + waveOut
+│   ├── audio_mci.c   早期 MCI 实现，保留作对照，不参与编译
 │   ├── tag_id3.c     ID3 标签与封面提取
 │   ├── wicdec.c      WIC 图片解码
 │   ├── lrc.c         LRC 歌词解析
