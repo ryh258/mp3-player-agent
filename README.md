@@ -7,6 +7,14 @@
 
 ---
 
+## ⬇️ 下载
+
+不想自己编译，可以直接下编译好的 exe：
+
+**[v0.3 · Releases](https://github.com/ryh258/mp3-player-agent/releases/latest) → `MP3Player.exe`**（1.13 MB，免安装，双击即用）
+
+---
+
 ## ✨ 特点
 
 - **零第三方依赖** —— 只调用系统自带 DLL，编译产物是单个 exe（约 1.1 MB）
